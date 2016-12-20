@@ -12,6 +12,9 @@ class UsersController < ApplicationController
     # 新しい@userのデータを作成
     @user = User.new(user_params)
     if @user.save
+      # Railsで一時的なメッセージを表示するためにはredirect_toやrenderの前に
+      # flashというハッシュに:success，:alertなどのキーを指定してメッセージを代入
+      flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
     else
       render 'new'

@@ -9,6 +9,10 @@
 <body>
   <%= render 'layouts/header' %>
   <div class="coutainer">
+    <!-- flashはハッシュなのでeachでキー(message_type)と値(message)のペアを取り出し，順にアラート表示 -->
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
     <%= yield %> <!-- 各ページのテンプレートが読み込まれる -->
   </div>
 </body>
