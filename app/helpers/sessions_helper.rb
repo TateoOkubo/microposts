@@ -22,4 +22,44 @@ module SessionsHelper
     # リクエストがGETならsession[:forwarding_url]にリクエストのURLを代入
     session[:forwarding_url] = request.url if request.get?
   end
+
+  # 存在するならtrue, 存在しないならnil
+  def profile_exist?
+    @find = User.find_by(id: session[:user_id]).profile
+    #binding.pry
+    if @find.eql?("")
+      @profile_exist = nil
+    else
+      @profile_exist = true
+    end
+    #!!@profile_exist ||= User.find_by(id: session[:user_id]).profile 
+    #if @user.profile = nil
+    #  @profile_exist = nil
+    #else
+    #  @profile_exist = true
+    #end
+  end
+  
+  def region_exist?
+    @find = User.find_by(id: session[:user_id]).region
+    #binding.pry
+    if @find.eql?("")
+      @profile_exist = nil
+    else
+      @profile_exist = true
+    end
+    
+    #!!@region_exist ||= User.find_by(region: session[:user_id]) 
+    #if @user.region.eql?('')
+    #  @profile_exist = nil
+    #else
+    #  @profile_exist = true
+    #end
+  end
+  
+  #def edit_user
+  #  current_user 
+  #end
+  
+  
 end

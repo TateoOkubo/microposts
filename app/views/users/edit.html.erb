@@ -1,0 +1,40 @@
+<!- ユーザ画面と同じアイコンを表示 -->
+<h1>
+  <!-- Gravatar　から画像を引っ張ってHTMLタグを出力 -->
+  <%= gravatar_for @user %>
+  <%= @user.name %>
+</h1>
+
+<h1>ユーザ情報更新</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user) do |f| %>
+    
+      <%= render 'shared/error_messages', object: f.object %>
+    
+      <!-- class: 'form-control' でバリデーションエラーでたら赤枠表示でエラー -->
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: 'form-control' %>
+      
+      <%= f.label :email, "eメール" %>
+      <%= f.text_field :email, class: 'form-control' %>
+      
+      
+      <%= f.label :profile, "Profile" %>
+      <%= f.text_field :profile, class: 'form-control' %>
+      
+      <%= f.label :region, "地域" %>
+      <%= f.text_field :region, class: 'form-control' %>
+      
+      <%= f.label :password, "パスワード" %>
+      <%= f.password_field :password, class: 'form-control' %>
+      
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      
+      
+      <%= f.submit "アカウントを更新します", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

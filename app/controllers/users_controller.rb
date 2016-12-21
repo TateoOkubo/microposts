@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :current_user_name, only: [:edit, :update]
+  before_action :set_profile, only: [:edit, :update]
   
   def show
     @user = User.find(params[:id])
@@ -21,9 +23,40 @@ class UsersController < ApplicationController
     end
   end
   
+  # 基本情報の編集画面
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  # 更新処理
+  def update
+    if @profile.update(user_params)
+      redirect_to edit , notice: 'メッセージを編集しました'
+      #redirect_to root_path , notice '更新しました'
+    else
+      render 'edit'
+    end
+  end
+  
   private
   
+  # プロフィールと地域が加わったので
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end      
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile, :region)
+  end
+  
+  # editとupdate前に，ログイン中のユーザかどうかを確認
+  def current_user_name
+    @user = User.find(params[:id])
+    
+    # ログイン中のユーザでなければログインしてくださいと表示して，rootへリダイレクト
+    unless @user == current_user
+      flash[:danger] = "ログインしてやり直してください."
+      redirect_to(root_path) 
+    end
+  end
+  
+  def set_profile
+    @profile = User.find(params[:id])
+  end
 end
