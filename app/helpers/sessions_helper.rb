@@ -23,25 +23,9 @@ module SessionsHelper
     session[:forwarding_url] = request.url if request.get?
   end
 
-  # 存在するならtrue, 存在しないならnil
-  def profile_exist?
-    @find = User.find_by(id: session[:user_id]).profile
-    if @find.eql?("")
-      @profile_exist = nil
-    else
-      @profile_exist = true
-    end
-  end
   
-  def region_exist?
-    @find = User.find_by(id: session[:user_id]).region
-    #binding.pry
-    if @find.eql?("")
-      @profile_exist = nil
-    else
-      @profile_exist = true
-    end
-  end
+  
+
   
   
 end

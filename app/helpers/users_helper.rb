@@ -8,4 +8,24 @@ module UsersHelper
     # image_tagメソッドで<img>タグが出力
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
+  
+  # プロフィールが存在するならtrue, 存在しないならnil
+  def profile_exist?(user)
+    @find = User.find_by(id: @user.id).profile
+    if @find.eql?("") || @find == nil
+      @profile_exist = nil
+    else
+      @profile_exist = true
+    end
+  end
+  
+  def region_exist?(user)
+    @find = User.find_by(id: @user.id).region
+    if @find.eql?("") || @find == nil
+      @profile_exist = nil
+    else
+      @profile_exist = true
+    end
+  end
+  
 end

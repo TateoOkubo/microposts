@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :current_user_name, only: [:edit, :update]
+  #before_action :current_user_name, only: [:edit, :update]
   before_action :set_profile, only: [:edit, :update]
   
   def show
@@ -25,15 +25,23 @@ class UsersController < ApplicationController
   
   # 基本情報の編集画面
   def edit
+    #binding.pry
+    #redirect_to (edit_user_path)
     @user = User.find(params[:id])
+    if User.find(params[:id]) == current_user
+      
+    else
+      flash[:danger] = "他のユーザ情報は更新できません"
+      # 編集しようとしたユーザのページへ
+      redirect_to (user_path)
+    end
   end
   
   # 更新処理
   def update
-    binding.pry
     if @profile.update(user_params)
       flash[:success] = '編集完了！'
-      redirect_to user_path
+      redirect_to (user_path)
     else
       # エラー表示
       flash[:danger] = '更新失敗'
@@ -46,17 +54,6 @@ class UsersController < ApplicationController
   # プロフィールと地域が加わったので
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile, :region)
-  end
-  
-  # editとupdate前に，ログイン中のユーザかどうかを確認
-  def current_user_name
-    @user = User.find(params[:id])
-    
-    # ログイン中のユーザでなければログインしてくださいと表示して，rootへリダイレクト
-    unless @user == current_user
-      flash[:danger] = "ログインしてやり直してください."
-      redirect_to(root_path) 
-    end
   end
   
   def set_profile

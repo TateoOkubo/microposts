@@ -15,6 +15,11 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: {case_sensitive: false }
   
+  # プロフィールは最大100文字
+  validates :profile, length: { maximum: 100 }
+  # 地域は最大50文字
+  validates :region, length: { maximum: 50 }
+  
   has_secure_password
 
 end

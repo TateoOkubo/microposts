@@ -6,8 +6,8 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <h2>プロフィール</h2>
-      <% if profile_exist? %>
+     <h2>プロフィール</h2>
+      <% if profile_exist?(@user) %>
         <p><%= @user.profile %></p>
       <% else %>
         <p>プロフィールが設定されていません</p>
@@ -15,7 +15,7 @@
     
     
     <h2>地域</h2>
-      <% if region_exist? %>
+      <% if region_exist?(@user) %>
         <p><%= @user.region %></p>
       <% else %>
         <p>地域が設定されていません</p>
