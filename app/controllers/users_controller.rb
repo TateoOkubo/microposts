@@ -30,10 +30,13 @@ class UsersController < ApplicationController
   
   # 更新処理
   def update
+    binding.pry
     if @profile.update(user_params)
-      redirect_to edit , notice: 'メッセージを編集しました'
-      #redirect_to root_path , notice '更新しました'
+      flash[:success] = '編集完了！'
+      redirect_to user_path
     else
+      # エラー表示
+      flash[:danger] = '更新失敗'
       render 'edit'
     end
   end
