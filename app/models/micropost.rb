@@ -5,5 +5,5 @@ class Micropost < ActiveRecord::Base
   # user_idが存在する
   validates :user_id, presence: true
   # contentが存在し，最大140文字
-  vaildates :content, presence: true, length: { maximum: 140 }
+  validates :content, presence: true, length: { maximum: 140 }
 end

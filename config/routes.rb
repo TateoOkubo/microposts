@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get 'edit' , to: 'users#edit'
   
   resources :users
+  resources :microposts
 end
