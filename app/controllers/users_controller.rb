@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  #before_action :current_user_name, only: [:edit, :update]
+  before_action :current_user_name, only: [:edit, :update]
   before_action :set_profile, only: [:edit, :update]
   
   def show
@@ -25,16 +25,7 @@ class UsersController < ApplicationController
   
   # 基本情報の編集画面
   def edit
-    #binding.pry
-    #redirect_to (edit_user_path)
-    @user = User.find(params[:id])
-    if User.find(params[:id]) == current_user
-      
-    else
-      flash[:danger] = "他のユーザ情報は更新できません"
-      # 編集しようとしたユーザのページへ
-      redirect_to (user_path)
-    end
+    #@user = User.find(params[:id])
   end
   
   # 更新処理
@@ -58,5 +49,10 @@ class UsersController < ApplicationController
   
   def set_profile
     @profile = User.find(params[:id])
+  end
+  
+  def current_user_name
+    @user = User.find(params[:id])
+    redirect_to root_path if @user != current_user
   end
 end
