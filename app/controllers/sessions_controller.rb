@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
       render 'new'
     end
   end
+
   
   # ログアウト処理
   def destroy

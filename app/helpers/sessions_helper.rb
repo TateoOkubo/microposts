@@ -22,4 +22,10 @@ module SessionsHelper
     # リクエストがGETならsession[:forwarding_url]にリクエストのURLを代入
     session[:forwarding_url] = request.url if request.get?
   end
+
+  
+  
+
+  
+  
 end
