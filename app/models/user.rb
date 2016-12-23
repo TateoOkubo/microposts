@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class User < ActiveRecord::Base
   # データの保存前にメールアドレスのアルファベットを小文字に
   #before_save はコールバッグで，データ保存前に指定ブロックorメソッドを実行
@@ -25,4 +26,41 @@ class User < ActiveRecord::Base
   # それぞれのユーザは複数の投稿を持つことが出来る
   has_many :microposts
 
+  # foreign_keyのfollower_idにuserのidが入る
+  # user.following_relationshipsによって
+  # userがフォローしている場合のrelationshipの集まりを取得
+  has_many :following_relationships, class_name:  "Relationship",
+                                     foreign_key: "follower_id",
+                                     dependent:   :destroy
+  
+  # has_many ~ through 文
+  # following_relationshipsを経由してフォローしているユーザの集まりを取得
+  has_many :following_users, through: :following_relationships, source: :followed
+
+  has_many :follower_relationships, class_name:  "Relationship",
+                                    foreign_key: "followed_id",
+                                    dependent:   :destroy
+  
+  has_many :follower_users, through: :follower_relationships, source: :follower
+
+
+  # 他のユーザをフォローする
+  # find_or_create_byは引数のパラメータと一致するものを1件取得し，
+  # 存在する場合はそのオブジェクトを返し，
+  # 存在しなければ引数の内容で新しくオブジェクトを作成し，DBに保存
+  def follow(other_user)
+    following_relationships.find_or_create_by(followed_id: other_user.id)
+  end
+  
+  # フォローしているユーザをアンフォローする
+  def unfollow(other_user)
+    following_relationship = following_relationships.find_by(followed_id: other_user.id)
+    following_relationship.destroy if following_relationship
+  end
+  
+  # あるユーザをフォローしているかどうか?
+  # 他のユーザがfollowing_usersに含まれているかチェック
+  def following?(other_user)
+    following_users.include?(other_user)
+  end
 end
