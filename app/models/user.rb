@@ -26,22 +26,32 @@ class User < ActiveRecord::Base
   # それぞれのユーザは複数の投稿を持つことが出来る
   has_many :microposts
 
-  # foreign_keyのfollower_idにuserのidが入る
-  # user.following_relationshipsによって
-  # userがフォローしている場合のrelationshipの集まりを取得
   has_many :following_relationships, class_name:  "Relationship",
                                      foreign_key: "follower_id",
                                      dependent:   :destroy
-  
-  # has_many ~ through 文
-  # following_relationshipsを経由してフォローしているユーザの集まりを取得
   has_many :following_users, through: :following_relationships, source: :followed
-
   has_many :follower_relationships, class_name:  "Relationship",
                                     foreign_key: "followed_id",
                                     dependent:   :destroy
-  
   has_many :follower_users, through: :follower_relationships, source: :follower
+  # foreign_keyのfollower_idにuserのidが入る
+  # user.following_relationshipsによって
+  # userがフォローしている場合のrelationshipの集まりを取得
+  #has_many :following_relationships, class_name:  "Relationship",
+  #                                   foreign_key: "follower_id",
+  #                                   dependent:   :destroy
+  
+  # has_many ~ through 文
+  # following_relationshipsを経由してフォローしているユーザの集まりを取得
+  #has_many :following_users, through: :following_relationships, source: :followed
+  
+  
+
+  #has_many :follower_relationships, class_name:  "Relationship",
+  #                                  foreign_key: "followed_id",
+  #                                  dependent:   :destroy
+  
+  #has_many :follower_users, through: :follower_relationships, source: :follower
 
 
   # 他のユーザをフォローする
