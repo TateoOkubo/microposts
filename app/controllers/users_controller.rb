@@ -42,6 +42,17 @@ class UsersController < ApplicationController
     end
   end
   
+  # フォローしているユーザの表示
+  def followings
+    binding.pry
+    
+  end
+  
+  # フォローされているユーザを表示
+  def followers
+    @rel = Relationsip.
+  end
+  
   private
   
   # プロフィールと地域が加わったので
@@ -55,6 +66,6 @@ class UsersController < ApplicationController
   
   def current_user_name
     @user = User.find(params[:id])
-    redirect_to root_path if @user != current_user
+    redirect_to root_path if @user != current_user end
   end
 end
