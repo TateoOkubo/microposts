@@ -44,13 +44,19 @@ class UsersController < ApplicationController
   
   # フォローしているユーザの表示
   def followings
-    binding.pry
-    
+    @followings = User.find(params[:id]).following_users
+    #binding.pry
+    #@following = Relationship.where(follower_id: params[:id])
+    # フォローしているユーザを検索
+    #@following_user = User.find(@following.ids)
+    #@following = @following_user #Relationship.where(follower_id: params[:id])
   end
   
   # フォローされているユーザを表示
   def followers
-    @rel = Relationsip.
+    # .follower_usersでフォローされているユーザの集まりを取得可能
+    # app/models/user.rb参考
+    @followers = User.find(params[:id]).follower_users
   end
   
   private
@@ -66,6 +72,6 @@ class UsersController < ApplicationController
   
   def current_user_name
     @user = User.find(params[:id])
-    redirect_to root_path if @user != current_user end
+    redirect_to root_path if @user != current_user
   end
 end

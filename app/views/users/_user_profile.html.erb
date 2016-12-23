@@ -1,0 +1,31 @@
+<!-- プロフィールの表示 -->
+<div class="card hovercard">
+  <div class="cardheader">
+  
+  </div>
+    
+  <div class="avatar">
+    <%= gravatar_for user %>
+  </div>
+  <div class="info">
+    <div class="title">
+      <!-- ユーザー名をクリックすると，そのユーザーページへ -->
+      <%= link_to user.name, user %>
+    </div>
+    <div class="desc">
+      <% if profile_exist?(user) %>
+          <%= user.profile %>
+        <% else %>
+
+        <% end %>
+    </div>
+    <div class="desc">
+      <% if region_exist?(user) %>
+        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+        <%= user.region %>
+      <% else %>
+          
+      <% end %>
+    </div>
+  </div>
+</div>
