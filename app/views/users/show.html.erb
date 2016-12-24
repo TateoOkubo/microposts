@@ -1,31 +1,14 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-      </h1>
-      <h1>
-        <%= @user.name %>
-      </h1>
-
-      <!-- プロフィール -->
-      <h2>
-        <% if profile_exist?(@user) %>
-          <%= @user.profile %>
-        <% else %>
-
-        <% end %>
-      </h2>
+      <!-- ユーザのプロフィール表示 -->
+      <%= render 'user_profile' , user: @user %>
       
-      <!-- 地域 -->
-      <p>
-        <% if region_exist?(@user) %>
-          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-          <%= @user.region %>
-        <% else %>
-          
-        <% end %>
-      </p>
+      <!-- フォローしている/されているユーザリストへのリンク　-->
+      <%= link_to "フォロー",  followings_user_path(@user.id) %>
+      /
+      <%= link_to "フォロワー",  followers_user_path(@user.id) %>
+
     </section>
   </aside>
   <div class="col-md-8">
@@ -42,25 +25,3 @@
     <% end %>
   </div>
 </div>
-
-<!--
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-     <h2>プロフィール</h2>
-      <% if profile_exist?(@user) %>
-        <p><%= @user.profile %></p>
-      <% else %>
-        <p>プロフィールが設定されていません</p>
-      <% end %>
-    
-    
-    <h2>地域</h2>
-      <% if region_exist?(@user) %>
-        <p><%= @user.region %></p>
-      <% else %>
-        <p>地域が設定されていません</p>
-      <% end %>
-      
-  </div>
-</div>
--->

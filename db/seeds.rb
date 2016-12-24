@@ -18,10 +18,14 @@ print "."
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
+  region = "japan"
+  profile = "exampel-#{n+1}"
   User.create!(name: name,
               email: email,
               password:              password,
-              password_confirmation: password)
+              password_confirmation: password,
+              profile:               profile,
+              region:                region)
   print "."
 end
 puts "\n-> User_seeds OK!!"
@@ -35,6 +39,7 @@ users = User.order(:created_at).take(6)
 end
 puts "\n-> Micropost_seeds OK!!"
 
+<<<<<<< HEAD
 # リレーションシップ
 users = User.all
 user  = users.first
@@ -46,3 +51,22 @@ followers.each { |follower| follower.follow(user); print "." }
 puts "\n-> Follower_seeds OK!!"
 
 puts "\n=> All_seeds OK!!"
+=======
+# 地域
+
+
+# プロフィール
+
+
+# リレーションシップ
+#users = User.all
+#user  = users.first
+#following = users[2..50]
+#followers = users[3..40]
+#following.each { |followed| user.follow(followed); print "." }
+#puts "\n-> Following_seeds OK!!"
+#followers.each { |follower| follower.follow(user); print "." }
+#puts "\n-> Follower_seeds OK!!"
+
+puts "\n=> All_seeds OK!!"
+>>>>>>> followings-followers
