@@ -15,6 +15,7 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropost created!"
       redirect_to root_url
     else
+      @feed_items = current_user.feed_items.includes(:user).order(create_at: :desc)
       # 失敗したらapp/views/static_pages/home.html.erb　のテンプレートを表示
       render 'static_pages/home'
     end
