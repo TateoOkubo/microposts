@@ -26,32 +26,24 @@ class User < ActiveRecord::Base
   # それぞれのユーザは複数の投稿を持つことが出来る
   has_many :microposts
 
-  has_many :following_relationships, class_name:  "Relationship",
-                                     foreign_key: "follower_id",
-                                     dependent:   :destroy
-  has_many :following_users, through: :following_relationships, source: :followed
-  has_many :follower_relationships, class_name:  "Relationship",
-                                    foreign_key: "followed_id",
-                                    dependent:   :destroy
-  has_many :follower_users, through: :follower_relationships, source: :follower
   # foreign_keyのfollower_idにuserのidが入る
   # user.following_relationshipsによって
   # userがフォローしている場合のrelationshipの集まりを取得
-  #has_many :following_relationships, class_name:  "Relationship",
-  #                                   foreign_key: "follower_id",
-  #                                   dependent:   :destroy
+  has_many :following_relationships, class_name:  "Relationship",
+                                     foreign_key: "follower_id",
+                                     dependent:   :destroy
   
   # has_many ~ through 文
   # following_relationshipsを経由してフォローしているユーザの集まりを取得
-  #has_many :following_users, through: :following_relationships, source: :followed
+  has_many :following_users, through: :following_relationships, source: :followed
   
   
 
-  #has_many :follower_relationships, class_name:  "Relationship",
-  #                                  foreign_key: "followed_id",
-  #                                  dependent:   :destroy
+  has_many :follower_relationships, class_name:  "Relationship",
+                                    foreign_key: "followed_id",
+                                    dependent:   :destroy
   
-  #has_many :follower_users, through: :follower_relationships, source: :follower
+  has_many :follower_users, through: :follower_relationships, source: :follower
 
 
   # 他のユーザをフォローする
@@ -72,5 +64,12 @@ class User < ActiveRecord::Base
   # 他のユーザがfollowing_usersに含まれているかチェック
   def following?(other_user)
     following_users.include?(other_user)
+  end
+  
+  # user_idがフォローしているユーザと自分のつぶやきを取得
+  def feed_items
+    # following_user_idsは、Userモデルのhas_many :following_usersの部分で自動的に生成されたメソッド
+    # user1がこのコードを実行しようとするとself.idはuser1.idとなる
+    Micropost.where(user_id: following_user_ids + [self:id])
   end
 end
