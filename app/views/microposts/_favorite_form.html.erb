@@ -1,5 +1,5 @@
 <%# if current_user != @micropost %>
-  <div id="favorite_form">
+  <div id="favorite_form-<%= micropost.id %>">
   <%# binding.pry %>
   <% if micropost.favorite?(current_user) %>
     <%= render 'favorites/unfavorite', micropost: micropost %>
