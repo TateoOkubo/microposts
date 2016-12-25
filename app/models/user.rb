@@ -72,4 +72,18 @@ class User < ActiveRecord::Base
     # user1がこのコードを実行しようとするとself.idはuser1.idとなる
     Micropost.where(user_id: following_user_ids + [self:id])
   end
+  
+  has_many :favorites, foreign_key: "user_id", dependent: :destroy
+  has_many :favorite_microposts, through: :favorites, source: :micropost
+  
+  def favorite(micropost)
+    #binding.pry
+    favorites.find_or_create_by(micropost_id: micropost.id)
+  end
+  
+  def unfavorite(micropost)
+    favorite = favorites.find_by(micropost_id: micropost.id)
+    favorite.destroy if favorite
+  end
+  
 end

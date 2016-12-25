@@ -1,0 +1,7 @@
+<p>favorite</p>
+<%#= form_for(current_user.favorite_microposts.build, remote: true) do |f| %>
+<%= form_for(Favorite.new, remote: true) do |f| %>
+  <%# binding.pry %>
+  <div><%= hidden_field_tag :micropost_id, micropost.id %></div>
+  <%= f.submit "fav", class: "btn btn-primary" %>
+<% end %>

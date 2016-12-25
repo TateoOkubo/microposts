@@ -14,5 +14,9 @@
       <%= link_to "delete", micropost, method: :delete,
                                        data: { confirm: "You sure?" } %>
     <% end %>
+    
+    <!-- favo -->
+    <%# binding.pry %>
+    <%= render 'microposts/favorite_form', micropost: micropost if logged_in? %>
   </span>
 </li>

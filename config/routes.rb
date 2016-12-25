@@ -21,4 +21,6 @@ Rails.application.routes.draw do
        get :followings, :followers
     end
   end
+  
+  resources :favorites, only: [:create, :destroy]
 end
