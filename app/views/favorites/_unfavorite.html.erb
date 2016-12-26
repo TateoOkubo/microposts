@@ -1,7 +1,7 @@
 <%# binding.pry %>
 <%#= form_for(current_user.favorite_microposts.find_by(id: micropost.id), %>
-<%#= form_for(micropost.favorite_users.find_by(id: current_user.id), %>
-<%= form_for(Favorite.where(user_id: current_user.id).find_by(micropost_id: micropost.id), 
+<%#= form_for(Favorite.where(user_id: current_user.id).find_by(micropost_id: micropost.id), %> 
+<%= form_for(micropost.favorites.find_by(user_id: current_user.id), 
             html: { method: :delete },
             remote: true) do |f| %>
   <%= f.submit "unFavo", class: "btn" %>
