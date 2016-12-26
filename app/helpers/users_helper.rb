@@ -28,4 +28,8 @@ module UsersHelper
     end
   end
   
+  def favorite_users_micropost(user_id) 
+    @search_user_micropost = User.find(user_id).favorite_microposts
+  end
+  
 end

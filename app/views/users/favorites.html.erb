@@ -1,0 +1,14 @@
+<h1><%= User.find(params[:id]).name %>のお気に入り</h1>
+      <%# @micropost = current_user.favorites %>
+      <%# favorite_users_micropost(params[:id]) %>
+      <ol class="microposts">
+        <%# binding.pry %>
+        <!-- 
+        render partial: 'microposts/micropost', collection: @microposts
+        と同じ
+          -->
+        <% favorite_users_micropost(params[:id]).each do |micropost| %>
+          <%= render partial: 'microposts/micropost', locals: { micropost: micropost } %>
+        <% end %>
+        <%#= render @microposts %>
+      </ol>
