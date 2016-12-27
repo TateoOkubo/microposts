@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   def feed_items
     # following_user_idsは、Userモデルのhas_many :following_usersの部分で自動的に生成されたメソッド
     # user1がこのコードを実行しようとするとself.idはuser1.idとなる
-    Micropost.where(user_id: following_user_ids + [self:id])
+    Micropost.where(user_id: following_user_ids + [self.id])
   end
   
   has_many :favorites, foreign_key: "user_id", dependent: :destroy

@@ -19,7 +19,4 @@ class StaticPagesController < ApplicationController
     end
   end
   
-  def index
-    @feed_items =@feed_items.page(params[:page])
-  end
 end

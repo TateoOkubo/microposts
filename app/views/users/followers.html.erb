@@ -1,3 +1,7 @@
 <h1><%= User.find(params[:id]).name %>がフォローされているユーザ</h1>
 
 <%= render 'user_profile_list' , user_list: @followers %>
+
+<div class="pages col-lg-12 col-sm-12">
+  <%= paginate @followers %>
+</div>

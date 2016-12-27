@@ -2,4 +2,6 @@
 
 <%= render 'user_profile_list' , user_list: @followings %>
 
-<%= paginate @followings %>
+<div class="pages col-lg-12 col-sm-12">
+  <%= paginate @followings %>
+</div>

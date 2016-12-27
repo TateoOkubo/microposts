@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   def followers
     # .follower_usersでフォローされているユーザの集まりを取得可能
     # app/models/user.rb参考
-    @followers = User.find(params[:id]).follower_users
+    @followers = User.find(params[:id]).follower_users.page(params[:page])
   end
   
   def index
