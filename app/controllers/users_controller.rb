@@ -2,10 +2,12 @@ class UsersController < ApplicationController
   before_action :current_user_name, only: [:edit, :update]
   before_action :set_profile, only: [:edit, :update]
   
+  
   def show
     @user = User.find(params[:id])
     # ユーザに紐づいたマイクロポストを作成日が新しい順で取得し，@micropostsに
     @microposts = @user.microposts.order(created_at: :desc)
+    @microposts = @microposts.page(params[:page])
   end
   
   def new
@@ -44,7 +46,7 @@ class UsersController < ApplicationController
   
   # フォローしているユーザの表示
   def followings
-    @followings = User.find(params[:id]).following_users
+    @followings = User.find(params[:id]).following_users.page(params[:page])
     #binding.pry
     #@following = Relationship.where(follower_id: params[:id])
     # フォローしているユーザを検索
@@ -57,6 +59,15 @@ class UsersController < ApplicationController
     # .follower_usersでフォローされているユーザの集まりを取得可能
     # app/models/user.rb参考
     @followers = User.find(params[:id]).follower_users
+  end
+  
+  def index
+    binding.pry
+    @foloowings = @followings.page(params[:page])
+    @users = @user.following_users.page(params[:page])
+    @search_user_micropost = @search_user_micropost.page(params[:page])
+    
+    @microposts = @microposts.page(params[:page])
   end
   
   private

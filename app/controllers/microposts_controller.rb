@@ -32,6 +32,7 @@ class MicropostsController < ApplicationController
     redirect_to request.referrer || root_url
   end
   
+  
   private
   
   # フォームから受け取ったパラメータのparams[:micropost]のうち，

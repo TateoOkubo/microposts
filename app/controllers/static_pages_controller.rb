@@ -13,6 +13,13 @@ class StaticPagesController < ApplicationController
       # feed_itemsで現在のユーザのフォローしているユーザのマイクロポストを取得，
       # 作成日時が新しいもの順で並び替える
       @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
+      
+      # kaminariのやつ
+      @feed_items = @feed_items.page(params[:page])
     end
+  end
+  
+  def index
+    @feed_items =@feed_items.page(params[:page])
   end
 end
