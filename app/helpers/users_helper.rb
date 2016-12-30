@@ -6,7 +6,13 @@ module UsersHelper
     size = options[:size]
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     # image_tagメソッドで<img>タグが出力
-    image_tag(gravatar_url, alt: user.name, class: "gravatar")
+    #image_tag(gravatar_url, alt: user.name, class: "gravatar")
+    
+    if user.image?
+      image_tag(user.image.thumb.url, alt: user.name, class: "avater")
+    else
+      image_tag(gravatar_url, alt: user.name, class: "gravatar")
+    end
   end
   
   # プロフィールが存在するならtrue, 存在しないならnil

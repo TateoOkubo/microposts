@@ -5,7 +5,13 @@
   </div>
     
   <div class="avatar">
-    <%= gravatar_for user %>
+    <% if @user.image? %>
+　　  <%= image_tag @user.image.thumb.url %>
+　  <% else %>
+　　  <%= gravatar_for user %>
+　　  <%#= image_tag 'noimage.gif' %>
+　  <% end %>
+    <%#= gravatar_for user %>
   </div>
   <div class="info">
     <div class="title">

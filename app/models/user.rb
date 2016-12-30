@@ -45,7 +45,9 @@ class User < ActiveRecord::Base
   
   has_many :follower_users, through: :follower_relationships, source: :follower
 
-
+  
+  mount_uploader :image, ImageUploader
+  
   # 他のユーザをフォローする
   # find_or_create_byは引数のパラメータと一致するものを1件取得し，
   # 存在する場合はそのオブジェクトを返し，

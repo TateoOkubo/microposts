@@ -33,6 +33,8 @@
       <%= f.label :password_confirmation, "パスワードの確認" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
       
+      <%= f.label :image, "プロフィール画像" %>
+　　  <%= f.file_field :image %> 
       
       <%= f.submit "アカウントを更新します", class: "btn btn-large btn-primary" %>
     <% end %>

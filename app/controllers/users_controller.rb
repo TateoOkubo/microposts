@@ -61,15 +61,6 @@ class UsersController < ApplicationController
     @followers = User.find(params[:id]).follower_users.page(params[:page])
   end
   
-  def index
-    binding.pry
-    @foloowings = @followings.page(params[:page])
-    @users = @user.following_users.page(params[:page])
-    @search_user_micropost = @search_user_micropost.page(params[:page])
-    
-    @microposts = @microposts.page(params[:page])
-  end
-  
   private
   
   # プロフィールと地域が加わったので
@@ -84,5 +75,9 @@ class UsersController < ApplicationController
   def current_user_name
     @user = User.find(params[:id])
     redirect_to root_path if @user != current_user
+  end
+  
+  def user_params
+    params.require(:user).permit(:name, :description, :image)
   end
 end

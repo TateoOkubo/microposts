@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161225185353) do
+ActiveRecord::Schema.define(version: 20161230165310) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20161225185353) do
     t.datetime "updated_at",      null: false
     t.string   "profile"
     t.string   "region"
+    t.string   "image"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

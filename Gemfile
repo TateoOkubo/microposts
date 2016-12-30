@@ -31,6 +31,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem "jquery-turbolinks" # Turbolinksで遷移したときもjQuery.ready()を呼び出してくれる
 gem 'kaminari'
 
+# 画像アップロード用
+gem 'carrierwave'
+gem 'rmagick'
+
 gem 'faker'
 gem 'pry-byebug', group: :development
 # Use Unicorn as the app server
