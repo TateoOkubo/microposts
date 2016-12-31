@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   
   resources :favorites, only: [:create, :destroy]
   
+  resources :mutes, only: [:create, :destroy]
+  
   resources :users do
     member do
        get :followings, :followers, :favorites

@@ -48,6 +48,7 @@ class User < ActiveRecord::Base
   
   mount_uploader :image, ImageUploader
   
+  
   # 他のユーザをフォローする
   # find_or_create_byは引数のパラメータと一致するものを1件取得し，
   # 存在する場合はそのオブジェクトを返し，
@@ -86,6 +87,26 @@ class User < ActiveRecord::Base
   def unfavorite(micropost)
     favorite = favorites.find_by(micropost_id: micropost.id)
     favorite.destroy if favorite
+  end
+  
+  # ミュート機能
+  has_many :muting_relationships, class_name: "Mute", 
+                                  foreign_key: "muting_user_id",
+                                  dependent: :destroy
+  has_many :muting_users, through: :muting_relationships, source: :muted_user
+  
+  def mute(other_user)
+    
+    muting_relationships.find_or_create_by(muted_user_id: other_user.id)
+  end
+  
+  def unmute(other_user)
+    muting_relationship = muting_relationships.find_by(muted_user_id: other_user.id)
+    muting_relationship.destroy if muting_relationship
+  end
+  
+  def muting?(other_user)
+    muting_users.include?(other_user)
   end
   
 end

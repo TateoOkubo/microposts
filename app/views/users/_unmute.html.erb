@@ -1,0 +1,5 @@
+<%= form_for(current_user.muting_relationships.find_by(muted_user_id: @user.id),
+             html: { method: :delete },
+             remote: true) do |f| %>
+  <%= f.submit "Unmute", class: "btn" %>
+<% end %>
