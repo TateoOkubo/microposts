@@ -4,5 +4,5 @@
 <%= form_for(micropost.favorites.find_by(user_id: current_user.id), 
             html: { method: :delete },
             remote: true) do |f| %>
-  <%= f.submit "unFavo", class: "btn" %>
+  <%= f.submit "お気に入り", class: "btn" %>
 <% end %>

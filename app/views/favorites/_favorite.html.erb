@@ -3,5 +3,5 @@
 <%= form_for(current_user.favorites.build, remote: true) do |f| %>
   <%# binding.pry %>
   <div><%= hidden_field_tag :micropost_id, micropost.id %></div>
-  <%= f.submit "fav", class: "btn btn-primary" %>
+  <%= f.submit "お気に入り", class: "btn btn-primary" %>
 <% end %>
