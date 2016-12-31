@@ -5,14 +5,8 @@
   </div>
     
   <div class="avatar">
-    <% if @user.image? %>
-      <!-- リサイズした画像を表示 -->
-　　  <%= image_tag @user.image.thumb.url %>
-　  <% else %>
-　　  <%= gravatar_for user %>
-　　  <%#= image_tag 'noimage.gif' %>
-　  <% end %>
-    <%#= gravatar_for user %>
+    <!-- ユーザのアバター画像を表示 -->
+　　<%= gravatar_for user %>
   </div>
   <div class="info">
     <div class="title">

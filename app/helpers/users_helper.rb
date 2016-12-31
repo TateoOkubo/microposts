@@ -9,7 +9,7 @@ module UsersHelper
     #image_tag(gravatar_url, alt: user.name, class: "gravatar")
     
     if user.image?
-      image_tag(user.image.thumb.url, alt: user.name, class: "avater")
+      image_tag(user.image.thumb.url, alt: user.name, class: "gravatar")
     else
       image_tag(gravatar_url, alt: user.name, class: "gravatar")
     end
