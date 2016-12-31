@@ -6,6 +6,7 @@
     
   <div class="avatar">
     <% if @user.image? %>
+      <!-- リサイズした画像を表示 -->
 　　  <%= image_tag @user.image.thumb.url %>
 　  <% else %>
 　　  <%= gravatar_for user %>

@@ -34,6 +34,9 @@ gem 'kaminari'
 # 画像アップロード用
 gem 'carrierwave'
 gem 'rmagick'
+# For Carrierwave
+gem 'fog'
+gem 'nokogiri'
 
 gem 'faker'
 gem 'pry-byebug', group: :development
