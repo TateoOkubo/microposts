@@ -109,4 +109,13 @@ class User < ActiveRecord::Base
     muting_users.include?(other_user)
   end
   
+  # リツイート
+  has_many :remicroposting_relationships, class_name: "Remicropost",
+                                          foreign_key: "post_id_id",
+                                          dependent: :destroy
+  has_many  :remicroposting_users, through: :remicroposting_relationships, source: :post_id
+
+  def remicropost(other_user)
+    remicroposting_relationships.find_or_create_by(post_id_id: other_user.id)
+  end
 end

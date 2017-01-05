@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   
   # 更新処理
   def update
-    if @profile.update(user_params)
+    if @profile.update(user_params_update)
       flash[:success] = '編集完了！'
       redirect_to (user_path)
     else
@@ -65,7 +65,11 @@ class UsersController < ApplicationController
   
   # プロフィールと地域が加わったので
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile, :region)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation) #, :profile, :region)
+  end
+  
+  def user_params_update
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile, :region, :description, :image)
   end
   
   def set_profile
@@ -76,8 +80,5 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to root_path if @user != current_user
   end
-  
-  def user_params
-    params.require(:user).permit(:name, :description, :image)
-  end
+
 end
