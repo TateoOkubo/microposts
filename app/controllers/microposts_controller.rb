@@ -43,7 +43,6 @@ class MicropostsController < ApplicationController
   # params[:micropost][:content]のみデータの作成に使用するように
   # Strong Parametersを宣言
   def micropost_params
-    binding.pry
     params.require(:micropost).permit(:content)
   end
 end
