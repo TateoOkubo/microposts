@@ -15,8 +15,12 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropost created!"
       redirect_to root_url
     else
-      @feed_items = current_user.feed_items.includes(:user).order(create_at: :desc)
+      
+      @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
       # 失敗したらapp/views/static_pages/home.html.erb　のテンプレートを表示
+      # ページネーション
+      @feed_items = @feed_items.page(params[:page])
+      
       render 'static_pages/home'
     end
   end
@@ -39,6 +43,7 @@ class MicropostsController < ApplicationController
   # params[:micropost][:content]のみデータの作成に使用するように
   # Strong Parametersを宣言
   def micropost_params
+    binding.pry
     params.require(:micropost).permit(:content)
   end
 end
